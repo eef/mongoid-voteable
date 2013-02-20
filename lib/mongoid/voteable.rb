@@ -8,6 +8,7 @@ module Mongoid
     included do
       field :votes, :type => Integer, :default => 0
       field :voters, :type => Array, :default => []
+      field :voted, :type => Array, :default => []
     end
 
     def vote(amount, voter)
@@ -15,6 +16,7 @@ module Mongoid
       unless voted?(id)
         self.inc :votes, amount.to_i
         self.push :voters, id
+        voters.profile.push :voted, self._id
       end
     end
 
