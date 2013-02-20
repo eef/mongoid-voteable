@@ -16,7 +16,7 @@ module Mongoid
       unless voted?(id)
         self.inc :votes, amount.to_i
         self.push :voters, id
-        voters.profile.push :voted, self._id
+        voter.profile.push :voted, self._id
       end
     end
 
