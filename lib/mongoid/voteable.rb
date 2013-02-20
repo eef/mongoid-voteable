@@ -17,6 +17,14 @@ module Mongoid
         self.inc :votes, amount.to_i
         self.push :voters, id
         voter.push :voted, self._id
+
+        # TODO: add to queue if this fucks up after validation???
+        # begin
+        #   self.push :voters, id
+        #   voter.push :voted, self._id
+        # rescue
+        #   # add to queue
+        # end
       end
     end
 
