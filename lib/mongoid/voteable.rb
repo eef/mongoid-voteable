@@ -32,7 +32,7 @@ module Mongoid
     module InstanceMethods
 
       def voted_by
-        self.class.where(:_id => {"$in" => self.voters})
+        self.class.where(:_id => {"$in" => self.voters}).only(:_slugs, :avatar, :name, :_id)
       end
 
     end
