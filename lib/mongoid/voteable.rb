@@ -29,6 +29,14 @@ module Mongoid
       voters.count
     end
 
+    module InstanceMethods
+
+      def voted_by
+        self.class.where(:_id => {"$in" => self.voters})
+      end
+
+    end
+
     private
 
     def voter_id(voter)
