@@ -13,7 +13,7 @@ module Mongoid
 
     def vote(amount, voter)
       id = voter_id(voter)
-      unless voted?(id)
+      unless voted?(self)
         self.inc :votes, amount.to_i
         self.push :voters, {:id => id, :date_time => Time.now - 24.hours}
         voter.push :voted, self._id
@@ -28,9 +28,8 @@ module Mongoid
       end
     end
 
-    def voted?(voter)
-      id = voter_id(voter)
-      voters.include?(id)
+    def voted?(votee)
+      self.voted.include?(votee.id)
     end
 
     def vote_count
