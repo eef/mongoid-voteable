@@ -15,7 +15,7 @@ module Mongoid
       id = voter_id(voter)
       unless voted?(self)
         self.inc :votes, amount.to_i
-        self.push :voters, {:id => id, :date_time => Time.now - 24.hours}
+        self.push :voters, {:id => id, :date_time => Time.now, :reward => false, :reward_id => nil}
         voter.push :voted, self._id
       end
     end
@@ -24,8 +24,9 @@ module Mongoid
       self.voted.include?(votee.id)
     end
 
-    def reward(amount)
+    def reward(amount, reward)
       self.inc :votes, amount.to_i
+      self.push :votes, {:id => id, :date_time => Time.now, :reward => true, :reward_id => reward.id}
     end
 
     def vote_count
