@@ -24,6 +24,10 @@ module Mongoid
       self.voted.include?(votee.id)
     end
 
+    def reward(amount)
+      self.inc :votes, amount.to_i
+    end
+
     def vote_count
       voters.count
     end
