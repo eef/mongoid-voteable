@@ -15,18 +15,13 @@ module Mongoid
       id = voter_id(voter)
       unless voted?(self)
         self.inc :votes, amount.to_i
-        self.push :voters, {:id => id, :date_time => Time.now, :achievement => false, :achievement_id => nil}
+        self.push :voters, {:id => id, :date_time => Time.now}
         voter.push :voted, self._id
       end
     end
 
     def voted?(votee)
       self.voted.include?(votee.id)
-    end
-
-    def reward(achievement)
-      self.inc :votes, achievement.miles.to_i
-      self.push :voters, {:id => nil, :date_time => Time.now, :achievement => true, :achievement_id => achievement.id}
     end
 
     def vote_count

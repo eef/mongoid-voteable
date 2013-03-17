@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "mongoid-voteable"
 
-  s.add_dependency "mongoid", "~> 3.0.5"
+  s.add_dependency "mongoid"
 
   s.add_development_dependency "database_cleaner", "~> 0.8.0"
   s.add_development_dependency "rake", "~> 0.9.2.2"
